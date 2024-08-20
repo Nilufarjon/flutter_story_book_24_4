@@ -234,7 +234,6 @@ class _MyApp extends State<MyApp> {
     // selectedItemsColors = Colors.white;
   }
 
-
   @override
   void initState() {
     setColors();

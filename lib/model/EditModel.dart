@@ -1,6 +1,5 @@
-class EditModel{
+class EditModel {
   String? key;
-
 
   // EditModel.fromMap(dynamic obj) {
   //   this.key = obj['key'];
@@ -11,7 +10,6 @@ class EditModel{
   // }
 
   Map<String, dynamic> toJson() => {
-    "dataDecoder":key,
-  };
-
+        "dataDecoder": key,
+      };
 }

@@ -63,6 +63,7 @@ class DatabaseHelper {
     return await db.insert(tableMainCat, map, nullColumnHack: 'id');
     // return await db.insert(table_main_cat, mainCat.toMap(),nullColumnHack: 'id');
   }
+
   Future<int> updateStory(ModelSubCategory mainCat) async {
     // Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database;
@@ -75,8 +76,8 @@ class DatabaseHelper {
     map['mark_read'] = mainCat.markRead;
     map['fav'] = mainCat.fav;
 
-
-    return await db.update(tableSubCat, map, where:  'id = ?',whereArgs: [mainCat.id]);
+    return await db
+        .update(tableSubCat, map, where: 'id = ?', whereArgs: [mainCat.id]);
     // return await db.insert(table_main_cat, mainCat.toMap(),nullColumnHack: 'id');
   }
 
@@ -92,7 +93,6 @@ class DatabaseHelper {
     map['fav'] = 0;
 
     return await db.insert(tableSubCat, map, nullColumnHack: '');
-
   }
 
   Future<List> getAllMainCatList() async {
@@ -107,8 +107,8 @@ class DatabaseHelper {
   Future<List> getAllCategories() async {
     Database database = await instance.database;
     var results = await database.rawQuery(
-        'SELECT * FROM categories',
-        );
+      'SELECT * FROM categories',
+    );
     // print('cfmkvnmvdfk');
     // var results = await database.query(categoriesTable);
     print('Categorires List ---->${results}');
@@ -126,7 +126,7 @@ class DatabaseHelper {
     Database database = await instance.database;
     int id = row['id'];
     return await database
-        .update(tableMainCat, row, where:  'id = ?', whereArgs: [id]);
+        .update(tableMainCat, row, where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int> updateSubCatFav(ModelSubCategory modelSub) async {
@@ -165,7 +165,7 @@ class DatabaseHelper {
 
     var res = await database
         .query(tableSubCat, where: "main_cat_id" + " = ?", whereArgs: [id]);
-        // .query(tableSubCat, where: "main_cat_id" + " = ?", whereArgs: [1]);
+    // .query(tableSubCat, where: "main_cat_id" + " = ?", whereArgs: [1]);
 
     // ModelMainCat product =
     //     res.isNotEmpty ? ModelMainCat.fromMap(res.first) : null;
@@ -179,7 +179,7 @@ class DatabaseHelper {
 
     var res = await database
         .query(tableSubCat, where: "fav" + " = ?", whereArgs: [1]);
-        // .query(tableSubCat, where: "fav" + " = ?", whereArgs: [0]);
+    // .query(tableSubCat, where: "fav" + " = ?", whereArgs: [0]);
     // ModelMainCat product =
     //     res.isNotEmpty ? ModelMainCat.fromMap(res.first) : null;
     return res.toList();

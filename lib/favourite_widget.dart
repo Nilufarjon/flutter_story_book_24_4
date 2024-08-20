@@ -23,7 +23,8 @@ final List<int> sliderlistId = [1, 2, 3, 4, 5];
 List<ModelSubCategory> mainCatList = [];
 DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
-class _FavouriteWidget extends State<FavouriteWidget>with WidgetsBindingObserver, TickerProviderStateMixin  {
+class _FavouriteWidget extends State<FavouriteWidget>
+    with WidgetsBindingObserver, TickerProviderStateMixin {
   ThemeData? themeData;
   int posGet = 0;
 
@@ -39,12 +40,10 @@ class _FavouriteWidget extends State<FavouriteWidget>with WidgetsBindingObserver
     });
   }
 
-
   AnimationController? animationController;
 
   @override
   void initState() {
-
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
     super.initState();
@@ -97,31 +96,40 @@ class _FavouriteWidget extends State<FavouriteWidget>with WidgetsBindingObserver
         width: double.infinity,
         // height: SizeConfig.safeBlockVertical * 60,
         decoration: BoxDecoration(
-            color: ConstantDatas.backgroundColors,),
+          color: ConstantDatas.backgroundColors,
+        ),
         padding: EdgeInsets.all(10),
         child: ListView.separated(
-          padding: EdgeInsets.only(top: 8,bottom: 24),
-          physics:BouncingScrollPhysics(),
+          padding: EdgeInsets.only(top: 8, bottom: 24),
+          physics: BouncingScrollPhysics(),
           primary: true,
-          separatorBuilder: (context, index) => SizedBox(height: 16,),
+          separatorBuilder: (context, index) => SizedBox(
+            height: 16,
+          ),
           itemBuilder: (context, index) {
             ModelSubCategory maincat = mainCatList[index];
             //final int count = mainCatList.length;
             print("size==$index---${mainCatList.length}");
             final Animation<double> animation =
-            Tween<double>(begin: 0.0, end: 1.0)
-                .animate(
+                Tween<double>(begin: 0.0, end: 1.0).animate(
               // Tween<double>(begin: 0.0, end: 1.0).animate(
               CurvedAnimation(
                 parent: animationController!,
-                curve: Interval((1 / 6) * index, 1.0,
-                    curve: Curves.fastOutSlowIn),
+                curve:
+                    Interval((1 / 6) * index, 1.0, curve: Curves.fastOutSlowIn),
               ),
             );
             animationController!.forward();
 
-            return FavStoryItem(maincat: maincat,animationController: animationController!,animation: animation,posGet: posGet,);
-          },itemCount:mainCatList.length,),
+            return FavStoryItem(
+              maincat: maincat,
+              animationController: animationController!,
+              animation: animation,
+              posGet: posGet,
+            );
+          },
+          itemCount: mainCatList.length,
+        ),
       );
     } else {
       setWidgets = Container(
@@ -144,7 +152,6 @@ class _FavouriteWidget extends State<FavouriteWidget>with WidgetsBindingObserver
       ),
       body: setWidgets,
     );
-
   }
 
   void getDataList() {
@@ -159,8 +166,6 @@ class _FavouriteWidget extends State<FavouriteWidget>with WidgetsBindingObserver
       });
     });
   }
-
-
 }
 
 class AddStoryItem extends StatefulWidget {
@@ -172,7 +177,6 @@ class AddStoryItem extends StatefulWidget {
   _AddStoryItem createState() => _AddStoryItem(this.homes);
 }
 
-
 class _AddStoryItem extends State<AddStoryItem> {
   _FavouriteWidget widgetHome;
 
@@ -181,7 +185,6 @@ class _AddStoryItem extends State<AddStoryItem> {
   final myTitleController = TextEditingController();
   final myStoryController = TextEditingController();
 
-
   @override
   void dispose() {
     super.dispose();
@@ -189,13 +192,10 @@ class _AddStoryItem extends State<AddStoryItem> {
     myStoryController.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return new InkWell(
-      onTap: () {
-      },
+      onTap: () {},
       child: new Card(
         elevation: 1.0,
         color: Colors.white,
@@ -211,7 +211,6 @@ class _AddStoryItem extends State<AddStoryItem> {
         ),
       ),
     );
-
   }
 }
 
@@ -221,9 +220,11 @@ class FavStoryItem extends StatelessWidget {
   final Animation<double> animation;
   final int posGet;
 
-
-   FavStoryItem({this.maincat, required this.animationController, required this.animation,required this.posGet});
-
+  FavStoryItem(
+      {this.maincat,
+      required this.animationController,
+      required this.animation,
+      required this.posGet});
 
   @override
   Widget build(BuildContext context) {
@@ -256,8 +257,7 @@ class FavStoryItem extends StatelessWidget {
     return FadeTransition(
       opacity: animation,
       child: Transform(
-        transform: Matrix4.translationValues(
-            0.0, 20 * (0.0 - 0), 0.0),
+        transform: Matrix4.translationValues(0.0, 20 * (0.0 - 0), 0.0),
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -271,14 +271,13 @@ class FavStoryItem extends StatelessWidget {
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: (posGet == 0)?"F4F4F4".toColor():ConstantDatas.cardBackground,
+              color: (posGet == 0)
+                  ? "F4F4F4".toColor()
+                  : ConstantDatas.cardBackground,
             ),
-
-
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-
                 Expanded(
                   child: Text(
                     maincat!.title,
@@ -316,9 +315,7 @@ class ItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: Card(
         elevation: 1.0,
         shape: RoundedRectangleBorder(

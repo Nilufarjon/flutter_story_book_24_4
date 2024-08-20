@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class FABBottomAppBarItem {
@@ -60,7 +58,6 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     return BottomAppBar(
       shape: widget.notchedShape,
       color: widget.backgroundColor,
-
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,7 +90,8 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     int? index,
     ValueChanged<int>? onPressed,
   }) {
-    Color? color = _selectedIndex == index ? widget.selectedColor : widget.color;
+    Color? color =
+        _selectedIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       child: SizedBox(
         height: widget.height,
@@ -108,9 +106,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
                 Icon(item!.iconData, color: color, size: widget.iconSize),
                 Text(
                   item.text!,
-                  style: TextStyle(
-                    fontSize: 12,
-                      color: color),
+                  style: TextStyle(fontSize: 12, color: color),
                 )
               ],
             ),

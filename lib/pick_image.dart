@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_story_app/generated/l10n.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 typedef void CallbackValue(dynamic value);
+
 class PickImage extends StatelessWidget {
   final CallbackValue? callbackFile;
   final Color? color;
@@ -46,12 +46,11 @@ class PickImage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                           S.of(context).camera,
+                            S.of(context).camera,
                             style: TextStyle(color: color ?? Colors.black45),
                           ),
                         ],
                       ),
-
                     ),
                   ),
                   Container(
@@ -59,7 +58,6 @@ class PickImage extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     color: Colors.white,
                     child: TextButton(
-
                       onPressed: () {
                         getImage(false);
                         Navigator.pop(context);
@@ -81,7 +79,6 @@ class PickImage extends StatelessWidget {
                           ),
                         ],
                       ),
-
                     ),
                   ),
                 ],
@@ -94,7 +91,7 @@ class PickImage extends StatelessWidget {
   }
 
   Future getImage(bool isKamera) async {
-    ImagePicker _picker=ImagePicker();
+    ImagePicker _picker = ImagePicker();
     // var image = await ImagePicker.pickImage(
     var image = await _picker.pickImage(
       source: isKamera ? ImageSource.camera : ImageSource.gallery,

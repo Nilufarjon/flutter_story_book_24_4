@@ -1,7 +1,6 @@
-
 class ModelSubCategory {
   int? id, fav, markRead, mainCatId;
-  String story='', img='', title='';
+  String story = '', img = '', title = '';
 
   ModelSubCategory();
 

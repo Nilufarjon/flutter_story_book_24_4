@@ -6,16 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_story_app/ConstantDatas.dart';
 import 'package:flutter_story_app/db/database_helper.dart';
 import 'package:flutter_story_app/generated/l10n.dart';
-import 'dart:io' as io;import 'package:flutter_quill/flutter_quill.dart' as quillView;
-
+import 'dart:io' as io;
+import 'package:flutter_quill/flutter_quill.dart' as quillView;
 
 import 'package:flutter_story_app/model/EditModel.dart';
 import 'package:flutter_story_app/model/ModelSubCategory.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-
-
-
 
 class EditYourStoryWidget extends StatefulWidget {
   final ModelSubCategory subCategory;
@@ -30,7 +27,7 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
   ModelSubCategory? _subCategory;
 
   TextEditingController myController = new TextEditingController();
-  String title='', imageName='', description='';
+  String title = '', imageName = '', description = '';
   Widget? imagewidget;
   File? _image;
   DatabaseHelper _databaseHelper = DatabaseHelper.instance;
@@ -52,8 +49,7 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
   _EditYourStoryWidget(this._subCategory);
 
   _imgFromGallery() async {
-    XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
     print(image!.path);
     setState(() {
       _image = File(image.path);
@@ -132,25 +128,16 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
     description = _subCategory!.story;
     myController = TextEditingController()..text = _subCategory!.title;
 
-
-
-
     EditModel editModel = new EditModel();
     editModel.key = _subCategory!.story;
 
-
-
-
-
-    quillView.Delta _delta =new  quillView.Delta()..insert(_subCategory!.story);
-
+    quillView.Delta _delta = new quillView.Delta()..insert(_subCategory!.story);
 
     final doc = quillView.Document.fromDelta(_delta);
     _controller = quillView.QuillController(
-        document: doc, selection:  TextSelection.collapsed(offset: _subCategory!.story.length-1));
-
-
-
+        document: doc,
+        selection:
+            TextSelection.collapsed(offset: _subCategory!.story.length - 1));
 
     ConstantDatas.setThemePosition();
     refreshImageWidget();
@@ -163,8 +150,6 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
     super.didChangeDependencies();
   }
 
-
-
   // GlobalKey<HtmlEditorState> keyEditor = GlobalKey();
   bool _visible = false;
 
@@ -175,7 +160,6 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
   }
 
   Future<bool> _onBackPressed() {
-
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -195,11 +179,10 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                   TextStyle(color: Colors.black54, fontWeight: FontWeight.bold),
             ),
           ),
-
           SizedBox(height: 16),
           new GestureDetector(
             onTap: () async {
-              description =  _controller.plainTextEditingValue.text.toString();
+              description = _controller.plainTextEditingValue.text.toString();
 
               title = myController.value.text;
               if (description.isNotEmpty) {
@@ -224,7 +207,6 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
               //     duration: Toast.LENGTH_LONG,
               //     gravity: Toast.BOTTOM);
 
-
               Fluttertoast.showToast(
                   msg: S.of(context).storyUpdatedSuccessfully,
                   toastLength: Toast.LENGTH_SHORT,
@@ -233,7 +215,6 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                   backgroundColor: Colors.black38,
                   textColor: Colors.white,
                   fontSize: 16.0);
-
 
               Navigator.of(context).pop();
               Navigator.pop(context);
@@ -292,7 +273,8 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                     onTap: () async {
                       // description = await keyEditor.currentState!.getText();
 
-                      description =  _controller.plainTextEditingValue.text.toString();
+                      description =
+                          _controller.plainTextEditingValue.text.toString();
 
                       title = myController.value.text;
                       if (description.isNotEmpty) {
@@ -358,8 +340,7 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                                 hintText: S.of(context).enterStoryTitle,
                                 labelText: S.of(context).enterStoryTitle,
                                 hintStyle: TextStyle(color: Colors.grey),
-                                labelStyle: TextStyle(color: Colors.grey))
-                            ),
+                                labelStyle: TextStyle(color: Colors.grey))),
                       ),
                     ),
                     Offstage(
@@ -373,19 +354,17 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                             Padding(
                               padding: EdgeInsets.only(left: 10),
                               child: ElevatedButton.icon(
-
                                 onPressed: () {
                                   _showPicker(context);
                                   // print('Button Clicked.');
                                 },
 
                                 style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.all(10),
-                                  // primary: ConstantDatas.primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)))
-                                ),
+                                    padding: EdgeInsets.all(10),
+                                    // primary: ConstantDatas.primaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)))),
                                 // shape: RoundedRectangleBorder(
                                 //     borderRadius: BorderRadius.all(
                                 //         Radius.circular(10.0))),
@@ -407,40 +386,38 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                       ),
                     ),
 
-
                     Padding(
                       padding: EdgeInsets.all(8),
                       child: quillView.QuillProvider(
-                        configurations: quillView.QuillConfigurations(controller: _controller),
+                        configurations: quillView.QuillConfigurations(
+                            controller: _controller),
                         child: quillView.QuillToolbar(
                           configurations: quillView.QuillToolbarConfigurations(
-                            color: Colors.white,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: ConstantDatas.cardBackground,
-                            ),
-                            showBoldButton: true,
-                            showUnderLineButton: true,
-                            showItalicButton: true,
-                            multiRowsDisplay: false,
-                            showLink: false,
-                            showHeaderStyle: false,
-                            showColorButton: false,
-                            showStrikeThrough: false,
-                            showFontFamily:false,
-                            showFontSize: false,
-                            showClearFormat: true
+                              color: Colors.white,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: ConstantDatas.cardBackground,
+                              ),
+                              showBoldButton: true,
+                              showUnderLineButton: true,
+                              showItalicButton: true,
+                              multiRowsDisplay: false,
+                              showLink: false,
+                              showHeaderStyle: false,
+                              showColorButton: false,
+                              showStrikeThrough: false,
+                              showFontFamily: false,
+                              showFontSize: false,
+                              showClearFormat: true),
 
-                          ),
-
-                            // controller: _controller,
-                            // multiRowsDisplay: false,
-                            // showLink: false,
-                            // showHeaderStyle: false,
-                            // showItalicButton: false,
-                            // // showVideoButton: false,
-                            // showColorButton: false,
-                            // showStrikeThrough: false
+                          // controller: _controller,
+                          // multiRowsDisplay: false,
+                          // showLink: false,
+                          // showHeaderStyle: false,
+                          // showItalicButton: false,
+                          // // showVideoButton: false,
+                          // showColorButton: false,
+                          // showStrikeThrough: false
                         ),
                       ),
                     ),
@@ -452,7 +429,7 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                       //   key: keyEditor,
                       //   showBottomToolbar: false,
                       // ),
-                      child:Container(
+                      child: Container(
                         margin: EdgeInsets.all(8),
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
@@ -460,13 +437,10 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                           color: ConstantDatas.cardBackground,
                         ),
                         child: quillView.QuillProvider(
-                          configurations: quillView.QuillConfigurations(controller: _controller,
-
+                          configurations: quillView.QuillConfigurations(
+                            controller: _controller,
                           ),
                           child: quillView.QuillEditor(
-                            
-
-
                             configurations: quillView.QuillEditorConfigurations(
                               scrollable: true,
                               autoFocus: true,
@@ -475,7 +449,6 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                               expands: false,
                               padding: EdgeInsets.zero,
                               enableSelectionToolbar: true,
-
                               customStyles: quillView.DefaultStyles(
                                 color: Colors.red,
                                 // paragraph: quillView.DefaultTextBlockStyle(
@@ -485,49 +458,36 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
                                 //     const Tuple2(16, 0),
                                 //     const Tuple2(0, 0),
                                 //     null
-
+                              ),
                             ),
-                            ),
-
-
-
-
                             scrollController: ScrollController(),
-                            focusNode: FocusNode(
-
-                            ),
-
-
-
-                            ),
+                            focusNode: FocusNode(),
+                          ),
                         ),
 
-
-                      //       scrollable: true,
-                      //       focusNode: new FocusNode(),
-                      //       autoFocus: true,
-                      //       readOnly: false,
-                      //
-                      //       enableInteractiveSelection: true,
-                      //       // placeholder: 'Add content',
-                      //       expands: false,
-                      //       padding: EdgeInsets.zero,
-                      //       customStyles: quillView.DefaultStyles(
-                      //         // color: Colors.white,
-                      //
-                      //         // paragraph: quillView.DefaultTextBlockStyle(
-                      //         //     TextStyle(
-                      //         //       color: ConstantDatas.textColors,
-                      //         //     ),
-                      //         //     const Tuple2(16, 0),
-                      //         //     const Tuple2(0, 0),
-                      //         //     null
-                      //         // ),
-                      //       )
-                      // ),
+                        //       scrollable: true,
+                        //       focusNode: new FocusNode(),
+                        //       autoFocus: true,
+                        //       readOnly: false,
+                        //
+                        //       enableInteractiveSelection: true,
+                        //       // placeholder: 'Add content',
+                        //       expands: false,
+                        //       padding: EdgeInsets.zero,
+                        //       customStyles: quillView.DefaultStyles(
+                        //         // color: Colors.white,
+                        //
+                        //         // paragraph: quillView.DefaultTextBlockStyle(
+                        //         //     TextStyle(
+                        //         //       color: ConstantDatas.textColors,
+                        //         //     ),
+                        //         //     const Tuple2(16, 0),
+                        //         //     const Tuple2(0, 0),
+                        //         //     null
+                        //         // ),
+                        //       )
+                        // ),
                       ),
-
-
 
                       flex: 1,
                     ),
@@ -549,13 +509,7 @@ class _EditYourStoryWidget extends State<EditYourStoryWidget> {
         ) // Your Scaffold goes here.
         );
   }
-
-
-
-
-
 }
-
 
 // Expanded(
 // child: QuillProvider(

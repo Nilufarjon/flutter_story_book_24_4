@@ -165,7 +165,7 @@ class _ReadQuickStory extends State<ReadQuickStory>
     });
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
 
-    if(mounted) {
+    if (mounted) {
       setState(() {
         opacity3 = 1.0;
       });

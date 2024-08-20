@@ -13,7 +13,6 @@ import 'package:flutter_story_app/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 class YourStoryWidget extends StatefulWidget {
   @override
   _YourStoryWidget createState() => _YourStoryWidget();
@@ -21,16 +20,14 @@ class YourStoryWidget extends StatefulWidget {
 
 class _YourStoryWidget extends State<YourStoryWidget> {
   TextEditingController myController = TextEditingController();
-  String title='', imageName = "kindness1.jpg", description='';
+  String title = '', imageName = "kindness1.jpg", description = '';
   Widget? imagewidget;
   File? _image;
   DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
   _imgFromCamera() async {
     final _picker = ImagePicker();
-    XFile? image = await _picker.pickImage(source: ImageSource.camera
-
-        );
+    XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
     setState(() {
       _image = File(image!.path);
@@ -41,8 +38,7 @@ class _YourStoryWidget extends State<YourStoryWidget> {
   }
 
   _imgFromGallery() async {
-    XFile? image =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
     print(image!.path);
     setState(() {
       _image = File(image.path);
@@ -67,7 +63,7 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                         color: ConstantDatas.textColors,
                       ),
                       title: new Text(
-                       S.of(context).photoLibrary,
+                        S.of(context).photoLibrary,
                         style: TextStyle(color: ConstantDatas.textColors),
                       ),
                       onTap: () {
@@ -111,7 +107,7 @@ class _YourStoryWidget extends State<YourStoryWidget> {
     }
   }
 
-  FocusNode _focusNode= new FocusNode();
+  FocusNode _focusNode = new FocusNode();
 
   @override
   void initState() {
@@ -124,10 +120,9 @@ class _YourStoryWidget extends State<YourStoryWidget> {
     //
     // });
   }
+
   quillView.QuillController _controller = quillView.QuillController.basic();
   QuillController controller = QuillController.basic();
-
-
 
   /// Safely access inherited widgets here.
   // @override
@@ -179,14 +174,15 @@ class _YourStoryWidget extends State<YourStoryWidget> {
               padding: EdgeInsets.only(right: 20.0),
               child: GestureDetector(
                 onTap: () async {
-                  description =  _controller.plainTextEditingValue.text.toString();
+                  description =
+                      _controller.plainTextEditingValue.text.toString();
                   // description = await keyEditor.currentState!.getText();
                   title = myController.value.text;
                   if (description.isNotEmpty &&
                       title.isNotEmpty &&
                       imageName.isNotEmpty) {
                     _databaseHelper.insertSubCat(title, description, imageName);
-                  }else{
+                  } else {
                     return;
                   }
                   // Navigator.push(
@@ -197,14 +193,13 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                   //     gravity: Toast.BOTTOM);
 
                   Fluttertoast.showToast(
-                      msg:S.of(context).storyAddedSuccessfully,
+                      msg: S.of(context).storyAddedSuccessfully,
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                       timeInSecForIosWeb: 1,
                       backgroundColor: Colors.black38,
                       textColor: Colors.white,
                       fontSize: 16.0);
-
 
                   Navigator.pushReplacement(
                     context,
@@ -250,15 +245,15 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                     //   ),
                     // ),
                     decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(color:Colors.grey)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(
-                                color: ConstantDatas.primaryColor)),
-                        hintText: S.of(context).enterStoryTitle,
-                        labelText: S.of(context).enterStoryTitle,
-                        hintStyle: TextStyle(color:Colors.grey),
-                        labelStyle: TextStyle(color:Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.grey)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: new BorderSide(
+                              color: ConstantDatas.primaryColor)),
+                      hintText: S.of(context).enterStoryTitle,
+                      labelText: S.of(context).enterStoryTitle,
+                      hintStyle: TextStyle(color: Colors.grey),
+                      labelStyle: TextStyle(color: Colors.grey),
                     ),
                   ),
                 ),
@@ -292,7 +287,6 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                     children: [
                       imagewidget!,
 
-
                       Padding(
                         padding: EdgeInsets.only(left: 10),
                         child: ElevatedButton.icon(
@@ -301,15 +295,16 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                           onPressed: () {
                             _showPicker(context);
                             // print('Button Clicked.');
-                          },style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.all(10),
-                          // textColor: Colors.white,
-                          // splashColor: Colors.grey,
-                          // primary: ConstantDatas.primaryColor,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0),
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(10),
+                            // textColor: Colors.white,
+                            // splashColor: Colors.grey,
+                            // primary: ConstantDatas.primaryColor,
+                            shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(10.0),
+                            ),
                           ),
-                        ),
 
                           // shape: RoundedRectangleBorder(
                           //     borderRadius:
@@ -322,7 +317,6 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                             Icons.photo,
                             color: Colors.white,
                           ),
-
                         ),
                       )
                       // ),
@@ -354,7 +348,7 @@ class _YourStoryWidget extends State<YourStoryWidget> {
               //     ),
               //   ),
               // ),
-///
+              ///
               Expanded(
                 // child: HtmlEditor(
                 //   hint: S.of(context).yourStory,
@@ -362,20 +356,19 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                 //   key: keyEditor,
                 //   showBottomToolbar: false,
                 // ),
-                child:Container(
+                child: Container(
                   margin: EdgeInsets.all(8),
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: ConstantDatas.cardBackground,
                   ),
-                  child:QuillProvider(
+                  child: QuillProvider(
                     configurations: QuillConfigurations(
                       controller: _controller,
                       sharedConfigurations: const QuillSharedConfigurations(
                         locale: Locale('de'),
                       ),
-
                     ),
                     child: Column(
                       children: [
@@ -404,7 +397,7 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                             showLink: false,
                             showQuote: false,
                             showStrikeThrough: false,
-                              showUnderLineButton: false,
+                            showUnderLineButton: false,
                             showListBullets: false,
                             showDirection: false,
                             showSubscript: false,
@@ -412,21 +405,11 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                             showLeftAlignment: true,
                             showRightAlignment: true,
                             showListCheck: false,
-
-
-
-
-
-
-
-
-
                           ),
                         ),
                         QuillEditor.basic(
                           focusNode: _focusNode,
                           configurations: const QuillEditorConfigurations(
-
                             readOnly: false,
                           ),
                           scrollController: ScrollController(),
@@ -436,18 +419,12 @@ class _YourStoryWidget extends State<YourStoryWidget> {
                   ),
                 ),
 
-
-
                 flex: 1,
               )
-
-
             ],
           ),
         )),
       ),
-
-
     );
   }
 }

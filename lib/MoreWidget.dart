@@ -25,8 +25,6 @@ double marginSize = 10;
 bool _isSwitched = false;
 
 class _MoreWidget extends State<MoreWidget> {
-
-
   RateMyApp rateMyApp = RateMyApp(
     preferencesPrefix: 'rateMyApp_',
     minDays: 7,
@@ -41,8 +39,6 @@ class _MoreWidget extends State<MoreWidget> {
     await rateMyApp.init();
     setState(() {});
   }
-
-
 
   int posGet = 0;
   int? selectedValue;
@@ -221,8 +217,8 @@ class _MoreWidget extends State<MoreWidget> {
   //   child: Divider(
   //     color: Colors.grey,
   //     height: 5,
-   // ),
- // );
+  // ),
+  // );
 
   /// Whether the dialog should be opened.
   bool shouldOpenDialog = false;
@@ -239,8 +235,10 @@ class _MoreWidget extends State<MoreWidget> {
     print("setswitchdata==2");
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text(S.of(context).setting, style: TextStyle(color: ConstantDatas.textColors,)),
+        title: Text(S.of(context).setting,
+            style: TextStyle(
+              color: ConstantDatas.textColors,
+            )),
         backgroundColor: ConstantDatas.backgroundColors,
         centerTitle: true,
       ),
@@ -292,7 +290,8 @@ class _MoreWidget extends State<MoreWidget> {
                 ),
                 Switch(
                   value: _isSwitched,
-                  thumbColor: MaterialStatePropertyAll(ConstantDatas.cardBackground),
+                  thumbColor:
+                      MaterialStatePropertyAll(ConstantDatas.cardBackground),
                   onChanged: (value) {
                     setState(() {
                       int setval = 0;
@@ -503,7 +502,8 @@ class _MoreWidget extends State<MoreWidget> {
 
             InkWell(
               onTap: () {
-                ConstantDatas.launchURL("https://doc-hosting.flycricket.io/ozor-nadekh/3a71cfd7-546d-4250-ae87-e9a59f5384a4/privacy?fbclid=IwZXh0bgNhZW0CMTAAAR3uqYlRCXlegPb9gw__UeSitswwzbC9zaezXyxZBftga10kjNMWafb_dEw_aem_AZ3XIWwcsv5zyUgzgZ-V86EJLvny5ttj8AVcmeaatndlLiMMDGYhnz6r31XrrTyHGf5a9AgTso9rZTZ1qKQImUgW");
+                ConstantDatas.launchURL(
+                    "https://doc-hosting.flycricket.io/ozor-nadekh/3a71cfd7-546d-4250-ae87-e9a59f5384a4/privacy?fbclid=IwZXh0bgNhZW0CMTAAAR3uqYlRCXlegPb9gw__UeSitswwzbC9zaezXyxZBftga10kjNMWafb_dEw_aem_AZ3XIWwcsv5zyUgzgZ-V86EJLvny5ttj8AVcmeaatndlLiMMDGYhnz6r31XrrTyHGf5a9AgTso9rZTZ1qKQImUgW");
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -549,13 +549,13 @@ class _MoreWidget extends State<MoreWidget> {
               ),
             ),
             // ),
-          //  widgetDevider,
+            //  widgetDevider,
 
             InkWell(
               onTap: () {
                 ConstantDatas.sendMail(context);
-                ConstantDatas.launchEmail(
-                    'nilufaritocf@gmail.com', 'Алоқа бо мо', 'Фиристонидан ба почта');
+                ConstantDatas.launchEmail('nilufaritocf@gmail.com',
+                    'Алоқа бо мо', 'Фиристонидан ба почта');
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -605,49 +605,52 @@ class _MoreWidget extends State<MoreWidget> {
               onTap: () {
                 // _buildShowStarRateDialog(context);
 
-
                 print("clickldm");
                 rateMyApp.showStarRateDialog(
                   context,
                   title: 'Оцените приложение', // The dialog title.
-                  message: 'You like this app ? Then take a little bit of your time to leave a rating :', // The dialog message.
+                  message:
+                      'You like this app ? Then take a little bit of your time to leave a rating :', // The dialog message.
                   // contentBuilder: (context, defaultContent) => content, // This one allows you to change the default dialog content.
-                  actionsBuilder: (context, stars) { // Triggered when the user updates the star rating.
-                    return [ // Return a list of actions (that will be shown at the bottom of the dialog).
+                  actionsBuilder: (context, stars) {
+                    // Triggered when the user updates the star rating.
+                    return [
+                      // Return a list of actions (that will be shown at the bottom of the dialog).
                       GestureDetector(
                         child: Text('OK'),
-                        onTap: ()  async {
+                        onTap: () async {
                           // print('Thanks for the ' + (stars == null ? '0' : stars.round().toString()) + ' star(s) !');
                           // // You can handle the result as you want (for instance if the user puts 1 star then open your contact page, if he puts more then open the store page, etc...).
                           // // This allows to mimic the behavior of the default "Rate" button. See "Advanced > Broadcasting events" for more information :
                           // await rateMyApp.callEvent(RateMyAppEventType.rateButtonPressed);
-                          if(Platform.isAndroid){
-                            Navigator.pop<RateMyAppDialogButton>(context, RateMyAppDialogButton.rate);
-                          }
-                          else{
-                            await rateMyApp.callEvent(RateMyAppEventType.rateButtonPressed);
+                          if (Platform.isAndroid) {
+                            Navigator.pop<RateMyAppDialogButton>(
+                                context, RateMyAppDialogButton.rate);
+                          } else {
+                            await rateMyApp.callEvent(
+                                RateMyAppEventType.rateButtonPressed);
                             Navigator.pop(context);
                             rateMyApp.launchStore();
                           }
-
-
 
                           // Navigator.pop(context);
                         },
                       ),
                     ];
                   },
-                  ignoreNativeDialog: Platform.isIOS, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
-                  dialogStyle: const DialogStyle( // Custom dialog styles.
+                  ignoreNativeDialog: Platform
+                      .isIOS, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+                  dialogStyle: const DialogStyle(
+                    // Custom dialog styles.
                     titleAlign: TextAlign.center,
                     messageAlign: TextAlign.center,
                     messagePadding: EdgeInsets.only(bottom: 20),
                   ),
-                  starRatingOptions: const StarRatingOptions(), // Custom star bar rating options.
-                  onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+                  starRatingOptions:
+                      const StarRatingOptions(), // Custom star bar rating options.
+                  onDismissed: () => rateMyApp.callEvent(RateMyAppEventType
+                      .laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
                 );
-
-
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -658,7 +661,6 @@ class _MoreWidget extends State<MoreWidget> {
                     height: imgSize,
                     width: imgSize,
                     decoration: BoxDecoration(
-
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         boxShadow: [
                           BoxShadow(

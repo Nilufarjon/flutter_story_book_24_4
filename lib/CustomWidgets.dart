@@ -36,7 +36,9 @@ Widget backIcon(var color, var icon, var iconColor, double paddingStart,
         child: Center(child: Icon(icon, color: iconColor))),
   );
 }
-Widget backImageIcon(var color, var icon, double paddingStart, double paddingEnd) {
+
+Widget backImageIcon(
+    var color, var icon, double paddingStart, double paddingEnd) {
   return Padding(
     padding: EdgeInsets.only(left: paddingStart, right: paddingEnd),
     child: Container(
@@ -44,7 +46,8 @@ Widget backImageIcon(var color, var icon, double paddingStart, double paddingEnd
         height: 35,
         decoration: boxDecoration(
             bgColor: color, radius: 10, color: white, showShadow: false),
-        child: Center(child: icon,)),
+        child: Center(
+          child: icon,
+        )),
   );
 }
-

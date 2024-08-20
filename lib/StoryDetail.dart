@@ -98,15 +98,16 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
     if (subCat!.markRead == 1) {
       widgetsBookmark = Icon(
         Icons.bookmark,
-        color:  Colors.black38,
+        color: Colors.black38,
       );
     } else {
       widgetsBookmark = Icon(
         Icons.bookmark_border,
-        color:  Colors.black38,
+        color: Colors.black38,
       );
     }
   }
+
   double _scale = 1.0;
 
   void _onDoubleTap() {
@@ -273,12 +274,9 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
           backgroundColor: ConstantDatas.backgroundColors,
           body: Column(
             children: [
-
-
               Container(
                 margin: EdgeInsets.only(top: 50),
-                padding:
-                    const EdgeInsets.only(left: 0,  right: 0),
+                padding: const EdgeInsets.only(left: 0, right: 0),
                 color: Colors.transparent,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -296,8 +294,8 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
                     new Offstage(
                       offstage: isEdit,
                       child: new InkWell(
-                        child: backIcon(white, Icons.edit, Colors.black38,
-                            0, defaultPaddingIcon),
+                        child: backIcon(white, Icons.edit, Colors.black38, 0,
+                            defaultPaddingIcon),
                         onTap: () {
                           Navigator.push(
                               context,
@@ -312,8 +310,8 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
                     ),
 
                     new InkWell(
-                      child: backIcon(white, Icons.format_size,
-                          Colors.black38, 2, defaultPaddingIcon),
+                      child: backIcon(white, Icons.format_size, Colors.black38,
+                          2, defaultPaddingIcon),
                       onTap: () {
                         _showDialog(context);
                       },
@@ -345,8 +343,7 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
                       width: 35,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(10)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
@@ -458,18 +455,16 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
                 child: ListView(
                   shrinkWrap: true,
 
-
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         subCat!.title,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          // color: Colors.black,
+                            // color: Colors.black,
                             color: ConstantDatas.textColors,
                             fontSize: _fontSize.toDouble(),
                             fontWeight: FontWeight.bold,
@@ -483,20 +478,19 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
                       duration: const Duration(milliseconds: 500),
                       opacity: opacity2,
                       child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 16,right: 16,
-                            bottom: 16),
-                          child: InteractiveViewer(
-                            child: HtmlWidget(
-                              onTapImage: (p0) {
-                                print('sizeeeeeeeeeee->$imgSize');
-                              },
-                              subCat!.story,
-                              textStyle: TextStyle(
-                                  color: ConstantDatas.textColors,
-                                  fontSize: _fontSize.toDouble()),
-                            ),
+                        padding:
+                            EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                        child: InteractiveViewer(
+                          child: HtmlWidget(
+                            onTapImage: (p0) {
+                              print('sizeeeeeeeeeee->$imgSize');
+                            },
+                            subCat!.story,
+                            textStyle: TextStyle(
+                                color: ConstantDatas.textColors,
+                                fontSize: _fontSize.toDouble()),
                           ),
+                        ),
                         // child:  InAppWebView(
                         //   initialUrlRequest: URLRequest(
                         //     body: bytesFromDataUri(subCat!.story,),
@@ -583,7 +577,6 @@ class _StoryDetail extends State<StoryDetail> with TickerProviderStateMixin {
 }
 
 String decodeHtml(String codeUnits) {
-
   final document = parse(codeUnits);
   final String parsedString = parse(document.body!.text).documentElement!.text;
 

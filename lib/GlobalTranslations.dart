@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _storageKey = "MyApplication_";
-const List<String> _supportedLanguages = ['en','fr'];
+const List<String> _supportedLanguages = ['en', 'fr'];
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
 class GlobalTranslations {
@@ -13,11 +13,14 @@ class GlobalTranslations {
   Map<dynamic, dynamic>? _localizedValues;
   VoidCallback? _onLocaleChangedCallback;
 
-  Iterable<Locale> supportedLocales() => _supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
+  Iterable<Locale> supportedLocales() =>
+      _supportedLanguages.map<Locale>((lang) => new Locale(lang, ''));
 
   String text(String key) {
     // Return the requested string
-    return (_localizedValues == null || _localizedValues![key] == null) ? '** $key not found' : _localizedValues![key];
+    return (_localizedValues == null || _localizedValues![key] == null)
+        ? '** $key not found'
+        : _localizedValues![key];
   }
 
   ///
@@ -34,7 +37,7 @@ class GlobalTranslations {
   /// One-time initialization
   ///
   Future<Null> init([String? language]) async {
-    if (_locale == null){
+    if (_locale == null) {
       await setNewLanguage(language!);
     }
     return null;
@@ -46,6 +49,7 @@ class GlobalTranslations {
   getPreferredLanguage() async {
     return _getApplicationSavedInformation('language');
   }
+
   setPreferredLanguage(String lang) async {
     return _setApplicationSavedInformation('language', lang);
   }
@@ -53,27 +57,28 @@ class GlobalTranslations {
   ///
   /// Routine to change the language
   ///
-  Future<Null> setNewLanguage([String? newLanguage, bool saveInPrefs = false]) async {
+  Future<Null> setNewLanguage(
+      [String? newLanguage, bool saveInPrefs = false]) async {
     String language = newLanguage!;
 
-
     // Set the locale
-    if (language == ""){
+    if (language == "") {
       language = "en";
     }
     _locale = Locale(language, "");
 
     // Load the language strings
-    String jsonContent = await rootBundle.loadString("locale/i18n_${_locale!.languageCode}.json");
+    String jsonContent = await rootBundle
+        .loadString("locale/i18n_${_locale!.languageCode}.json");
     _localizedValues = json.decode(jsonContent);
 
     // If we are asked to save the new language in the application preferences
-    if (saveInPrefs){
+    if (saveInPrefs) {
       await setPreferredLanguage(language);
     }
 
     // If there is a callback to invoke to notify that a language has changed
-    if (_onLocaleChangedCallback != null){
+    if (_onLocaleChangedCallback != null) {
       _onLocaleChangedCallback!();
     }
 
@@ -83,7 +88,7 @@ class GlobalTranslations {
   ///
   /// Callback to be invoked when the user changes the language
   ///
-  set onLocaleChangedCallback(VoidCallback callback){
+  set onLocaleChangedCallback(VoidCallback callback) {
     _onLocaleChangedCallback = callback;
   }
 
@@ -102,22 +107,22 @@ class GlobalTranslations {
   /// ----------------------------------------------------------
   /// Generic routine to saves an application preference
   /// ----------------------------------------------------------
-  Future<bool> _setApplicationSavedInformation(String name, String value) async {
+  Future<bool> _setApplicationSavedInformation(
+      String name, String value) async {
     final SharedPreferences prefs = await _prefs;
 
     return prefs.setString(_storageKey + name, value);
   }
 
-
   ///
   /// Singleton Factory
   ///
-  static final GlobalTranslations? _translations = new GlobalTranslations._internal();
+  static final GlobalTranslations? _translations =
+      new GlobalTranslations._internal();
   factory GlobalTranslations() {
     return _translations!;
   }
   GlobalTranslations._internal();
-
 }
 
 GlobalTranslations allTranslations = new GlobalTranslations();

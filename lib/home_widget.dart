@@ -95,13 +95,10 @@ class _HomeWidget extends State<HomeWidget> {
     ConstantDatas.textColors = themeData!.textSelectionTheme.selectionColor!;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     //double sliderHeight = SizeConfig.safeBlockVertical! * 30;
-
 
     return Scaffold(
         appBar: AppBar(
@@ -135,7 +132,6 @@ class _HomeWidget extends State<HomeWidget> {
             // color: "#ECE8E8".toColor(),
             child: Column(
               children: [
-
                 Expanded(
                   child: GridView.count(
                     crossAxisCount: 2,

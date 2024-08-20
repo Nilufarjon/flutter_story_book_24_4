@@ -164,8 +164,6 @@ class _ContactPageState extends State<ContactPage> {
                       ),
                     ),
                   ),
-
-
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Row(
@@ -187,7 +185,7 @@ class _ContactPageState extends State<ContactPage> {
                             "225 85 35",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              // color: ConstantDatas.textColors,
+                                // color: ConstantDatas.textColors,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
@@ -212,8 +210,6 @@ class _ContactPageState extends State<ContactPage> {
                       ),
                     ),
                   ),
-
-
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: Row(
@@ -235,7 +231,7 @@ class _ContactPageState extends State<ContactPage> {
                             "(992) 939 222 111",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              // color: ConstantDatas.textColors,
+                                // color: ConstantDatas.textColors,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
@@ -260,7 +256,6 @@ class _ContactPageState extends State<ContactPage> {
                       ),
                     ),
                   ),
-
                 ],
               ),
             )

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +14,6 @@ class PrefData {
   }
 
   getAppLanguage(BuildContext context) async {
-
     return "en";
   }
 
@@ -71,6 +69,4 @@ class PrefData {
     int intValue = prefs.getInt(themePos) ?? 0;
     return intValue;
   }
-
-
 }

@@ -54,5 +54,4 @@ class Assets {
   static const String assetsWittyMoral4 = 'assets/witty_moral4.jpg';
   static const String cate1 = 'assets/cate_1.png';
   static const String cate2 = 'assets/cate_2.png';
-
 }

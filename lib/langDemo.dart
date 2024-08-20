@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_story_app/generated/l10n.dart';
 
-
 class LangDemo extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _LangDemoState();
@@ -16,13 +15,10 @@ class _LangDemoState extends State<LangDemo> {
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
       S.delegate
-    ],
-        supportedLocales: S.delegate.supportedLocales,
-        home: MyHomePage());
+    ], supportedLocales: S.delegate.supportedLocales, home: MyHomePage());
     return matApp;
   }
 }
-
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -64,16 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
               flex: 1,
               child: Column(
                 children: [
-                  Text(S.of(context).pagehomelisttitle, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                  Text(S.of(context).pagehomelisttitle,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center),
                   Text("titleNames"),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.start,
-              )
-          )
+              ))
         ],
       ),
     );
   }
 }
-
-

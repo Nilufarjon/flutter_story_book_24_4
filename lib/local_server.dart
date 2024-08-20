@@ -87,33 +87,35 @@ class WebSocketServer {
       throw Exception('Server already started on http://localhost:$port');
     }
     var completer = new Completer();
-    runZoned(() {
-      HttpServer.bind('localhost', port!, shared: true).then(
-          (HttpServer server) {
-        print('[+]WebSocket listening at -- ws://localhost:$port/');
-        this.server = server;
-        server.listen((HttpRequest request) {
-          WebSocketTransformer.upgrade(request).then((WebSocket ws) {
-            ws.listen(
-              (data) {
-                print(
-                    '\t\t${request.connectionInfo?.remoteAddress} -- ${data.toString()}');
-                Timer(Duration(seconds: 1), () {
-                  if (ws.readyState == WebSocket.open)
-                    // checking connection state helps to avoid unprecedented errors
-                    ws.add("dfdfdfdfdfd");
-                });
-              },
-              onDone: () => print('[+]Done :)'),
-              onError: (err) => print('[!]Error -- ${err.toString()}'),
-              cancelOnError: true,
-            );
-            // request.response.close();
+    runZoned(
+      () {
+        HttpServer.bind('localhost', port!, shared: true).then(
+            (HttpServer server) {
+          print('[+]WebSocket listening at -- ws://localhost:$port/');
+          this.server = server;
+          server.listen((HttpRequest request) {
+            WebSocketTransformer.upgrade(request).then((WebSocket ws) {
+              ws.listen(
+                (data) {
+                  print(
+                      '\t\t${request.connectionInfo?.remoteAddress} -- ${data.toString()}');
+                  Timer(Duration(seconds: 1), () {
+                    if (ws.readyState == WebSocket.open)
+                      // checking connection state helps to avoid unprecedented errors
+                      ws.add("dfdfdfdfdfd");
+                  });
+                },
+                onDone: () => print('[+]Done :)'),
+                onError: (err) => print('[!]Error -- ${err.toString()}'),
+                cancelOnError: true,
+              );
+              // request.response.close();
+            }, onError: (err) => print('[!]Error -- ${err.toString()}'));
           }, onError: (err) => print('[!]Error -- ${err.toString()}'));
+          completer.complete();
         }, onError: (err) => print('[!]Error -- ${err.toString()}'));
-        completer.complete();
-      }, onError: (err) => print('[!]Error -- ${err.toString()}'));
-    }, );
+      },
+    );
 
     return completer.future;
   }
