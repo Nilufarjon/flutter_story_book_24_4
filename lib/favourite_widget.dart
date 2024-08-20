@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_story_app/generated/l10n.dart';
 import 'package:flutter_story_app/main.dart';
